@@ -11,11 +11,12 @@ import { fileURLToPath } from 'url';
 import { readFile } from "fs/promises";
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json()); 
 app.use(
     cors({
-      origin: "http://localhost:3000", // for Hosting 'https://trackmoto.horsemendevs.com',
+      origin: "https://tm.horsemendevs.com", // for Hosting 'https://trackmoto.horsemendevs.com',
       methods: ["GET", "POST", "PATCH"],
       credentials: true, // Allow cookies to be sent
     })
@@ -578,6 +579,6 @@ app.patch('/remove-image', async (req, res) => {
 });
 
 // Start server
-app.listen(8800, () => {
-  console.log("Connected to backend on port 8800");
+app.listen(PORT, () => {
+  console.log(`Connected to backend on port ${PORT}`);
 });
