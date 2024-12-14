@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/frontend/build/static/css/main.e92fbc91.css",
+    "main.js": "/frontend/build/static/js/main.3edab26d.js",
+    "static/js/453.d855a71b.chunk.js": "/frontend/build/static/js/453.d855a71b.chunk.js",
+    "static/media/motorbg.png": "/frontend/build/static/media/motorbg.006c14c057c4cd44348c.png",
+    "static/media/bike.png": "/frontend/build/static/media/bike.556fe85da863ee25a004.png",
+    "static/media/motoricon.png": "/frontend/build/static/media/motoricon.d405dab52e7cb0249f99.png",
+    "static/media/location.png": "/frontend/build/static/media/location.ecff52f4ddd3e1eae5c5.png",
+    "index.html": "/frontend/build/index.html",
+    "main.e92fbc91.css.map": "/frontend/build/static/css/main.e92fbc91.css.map",
+    "main.3edab26d.js.map": "/frontend/build/static/js/main.3edab26d.js.map",
+    "453.d855a71b.chunk.js.map": "/frontend/build/static/js/453.d855a71b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e92fbc91.css",
+    "static/js/main.3edab26d.js"
+  ]
+}
