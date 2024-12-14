@@ -37,7 +37,7 @@ const Login = () => {
       if (response.ok && data.userExists) {
         // Update user context
         await loginUser(data.user);
-
+        console.log(data.user);
         // Redirect to the protected page (e.g., Monitor page)
         navigate("/Monitor");
       } else {
