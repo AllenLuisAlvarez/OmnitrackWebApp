@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/trackmoto/static/css/main.b2c2b1c9.css",
-    "main.js": "/trackmoto/static/js/main.b6b203ab.js",
-    "static/js/453.d855a71b.chunk.js": "/trackmoto/static/js/453.d855a71b.chunk.js",
-    "static/media/motorbg.png": "/trackmoto/static/media/motorbg.006c14c057c4cd44348c.png",
-    "static/media/bike.png": "/trackmoto/static/media/bike.556fe85da863ee25a004.png",
-    "static/media/motoricon.png": "/trackmoto/static/media/motoricon.d405dab52e7cb0249f99.png",
-    "static/media/location.png": "/trackmoto/static/media/location.ecff52f4ddd3e1eae5c5.png",
-    "index.html": "/trackmoto/index.html",
-    "main.b2c2b1c9.css.map": "/trackmoto/static/css/main.b2c2b1c9.css.map",
-    "main.b6b203ab.js.map": "/trackmoto/static/js/main.b6b203ab.js.map",
-    "453.d855a71b.chunk.js.map": "/trackmoto/static/js/453.d855a71b.chunk.js.map"
+    "main.css": "/build/index.html/static/css/main.e92fbc91.css",
+    "main.js": "/build/index.html/static/js/main.bd4553a4.js",
+    "static/js/453.d855a71b.chunk.js": "/build/index.html/static/js/453.d855a71b.chunk.js",
+    "static/media/motorbg.png": "/build/index.html/static/media/motorbg.006c14c057c4cd44348c.png",
+    "static/media/bike.png": "/build/index.html/static/media/bike.556fe85da863ee25a004.png",
+    "static/media/motoricon.png": "/build/index.html/static/media/motoricon.d405dab52e7cb0249f99.png",
+    "static/media/location.png": "/build/index.html/static/media/location.ecff52f4ddd3e1eae5c5.png",
+    "index.html": "/build/index.html/index.html",
+    "main.e92fbc91.css.map": "/build/index.html/static/css/main.e92fbc91.css.map",
+    "main.bd4553a4.js.map": "/build/index.html/static/js/main.bd4553a4.js.map",
+    "453.d855a71b.chunk.js.map": "/build/index.html/static/js/453.d855a71b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b2c2b1c9.css",
-    "static/js/main.b6b203ab.js"
+    "static/css/main.e92fbc91.css",
+    "static/js/main.bd4553a4.js"
   ]
 }
