@@ -1,7 +1,6 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "/frontend/build/index.html",
   "private": true,
   "dependencies": {
     "@icons/material": "^0.4.1",

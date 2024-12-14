@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "testtrackmoto.horsemendevs.com/frontend/build/index.html/static/css/main.e92fbc91.css",
-    "main.js": "testtrackmoto.horsemendevs.com/frontend/build/index.html/static/js/main.5393da73.js",
-    "static/js/453.d855a71b.chunk.js": "testtrackmoto.horsemendevs.com/frontend/build/index.html/static/js/453.d855a71b.chunk.js",
-    "static/media/motorbg.png": "testtrackmoto.horsemendevs.com/frontend/build/index.html/static/media/motorbg.006c14c057c4cd44348c.png",
-    "static/media/bike.png": "testtrackmoto.horsemendevs.com/frontend/build/index.html/static/media/bike.556fe85da863ee25a004.png",
-    "static/media/motoricon.png": "testtrackmoto.horsemendevs.com/frontend/build/index.html/static/media/motoricon.d405dab52e7cb0249f99.png",
-    "static/media/location.png": "testtrackmoto.horsemendevs.com/frontend/build/index.html/static/media/location.ecff52f4ddd3e1eae5c5.png",
-    "index.html": "testtrackmoto.horsemendevs.com/frontend/build/index.html/index.html",
-    "main.e92fbc91.css.map": "testtrackmoto.horsemendevs.com/frontend/build/index.html/static/css/main.e92fbc91.css.map",
-    "main.5393da73.js.map": "testtrackmoto.horsemendevs.com/frontend/build/index.html/static/js/main.5393da73.js.map",
-    "453.d855a71b.chunk.js.map": "testtrackmoto.horsemendevs.com/frontend/build/index.html/static/js/453.d855a71b.chunk.js.map"
+    "main.css": "testtrackmoto.horsemendevs.com/fronend/build/static/css/main.e92fbc91.css",
+    "main.js": "testtrackmoto.horsemendevs.com/fronend/build/static/js/main.ebf03912.js",
+    "static/js/453.d855a71b.chunk.js": "testtrackmoto.horsemendevs.com/fronend/build/static/js/453.d855a71b.chunk.js",
+    "static/media/motorbg.png": "testtrackmoto.horsemendevs.com/fronend/build/static/media/motorbg.006c14c057c4cd44348c.png",
+    "static/media/bike.png": "testtrackmoto.horsemendevs.com/fronend/build/static/media/bike.556fe85da863ee25a004.png",
+    "static/media/motoricon.png": "testtrackmoto.horsemendevs.com/fronend/build/static/media/motoricon.d405dab52e7cb0249f99.png",
+    "static/media/location.png": "testtrackmoto.horsemendevs.com/fronend/build/static/media/location.ecff52f4ddd3e1eae5c5.png",
+    "index.html": "testtrackmoto.horsemendevs.com/fronend/build/index.html",
+    "main.e92fbc91.css.map": "testtrackmoto.horsemendevs.com/fronend/build/static/css/main.e92fbc91.css.map",
+    "main.ebf03912.js.map": "testtrackmoto.horsemendevs.com/fronend/build/static/js/main.ebf03912.js.map",
+    "453.d855a71b.chunk.js.map": "testtrackmoto.horsemendevs.com/fronend/build/static/js/453.d855a71b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e92fbc91.css",
-    "static/js/main.5393da73.js"
+    "static/js/main.ebf03912.js"
   ]
 }
