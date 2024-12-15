@@ -5,6 +5,7 @@
 /firebase-admin-key.json
 /.pnp
 .pnp.js
+.env
 
 # testing
 /coverage
