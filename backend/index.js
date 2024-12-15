@@ -41,7 +41,7 @@ const serviceAccount = {
   universe_domain: process.env.FIREBASE_UNIVERSE_DOMAIN,
 };
 
-initializeApp({ credential: cert(serviceAccount) });
+
 
 
 admin.initializeApp({
