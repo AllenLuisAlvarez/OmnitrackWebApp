@@ -1,169 +1,891 @@
-/* Sign UP CSS */
+    /* Sign UP CSS */
 
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.default-body{
-    background-color: #ffc107;
-}
-
-.signup-body, .login-body {
-    align-items: center;
-    justify-content: center;
-    font-family:Arial, sans-serif;
-    background-color: #fbbf24;
-    height: 100vh;
-    width: 100%;
-}
-
-.login-main-container, .signup-main-container {
-    text-align: center;
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
-}
-
-/* Container styling */
-.SignUp-container{
-    width: 100%;
-    padding: 40px;
-    background-color: #17191f;
-    border-radius: 40px;
-    color: #fdfdfd;
-    position: relative;
-    height: 90vh;  
-}
-
-.Login-container{
-  width: 100%;
-  padding: 75px;
-  background-color: #17191f;
-  border-radius: 40px;
-  color: #fdfdfd;
-  position: relative;
-  height: 90vh;  
-}
-
-.signupheader, .loginheader {
-    display: flex;
-    align-items: center;
-    justify-content:space-between;
-    margin-bottom: 30px;
-    margin-top: 40px;
-  
-}
-
-
-.headersignup, .headerlogin{
-    font-size: 30px;
-    font-weight: bold;
-    color: #050505;
-}
-
-.close-button {
-    padding: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #000000;
-    cursor: pointer;
-}
-
-.login, .SignUP {
-    padding: 10px; /* Remove all padding */
-    background: none;
-    border: none;
-    font-size: 14px;
-    color: #080808;
-    cursor: pointer;
-}
-
-/* Form styling */
-.signup-form, .Login-form{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px;
-}
-
-.input-field {
-    width: 100%;
-    padding: 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #2c2e38;
-    color: #fdfdfd;
-    outline: none;
-}
-
-.input-group {
-    display: flex;
-    gap: 10px;
-}
-
-.verify-button {
-    padding: 0 15px;
-    background-color: #fbbf24;
-    border: none;
-    border-radius: 8px;
-    color: #1c1e26;
-    font-weight: bold;
-    cursor: pointer;
-    width: 40%;
-}
-
-.SignUp, .Login-btn{
-    width: 100%;
-    padding: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    background-color: #fbbf24;
-    color: #1c1e26;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-  /* Forgot Password Link */
-  .forgot-password-link {
-    color: #ffc107;
-    text-decoration: none;
-    display: block;
-    margin-top: 15px;
-    font-size: 14px;
-  }
-
-
-@media (max-width: 320px){
-
-    .SignUp-container{
-        padding:30px;
-    }
-
-    .signup-form, .Login-form{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        bottom: 10px;
-        position: relative;
-    }
-
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
     
-.input-field {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #2c2e38;
-    color: #fdfdfd;
-    outline: none;
-}
+        .login-main-container, .signup-main-container {
+            text-align: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: #fbbf24 ;
+        }
+    
+        .SignUp-container{
+            width: 100%;
+            padding: 40px;
+            background-color: #17191f;
+            border-radius: 40px;
+            color: #fdfdfd;
+            position: relative;
+            height: 94vh;  
+        }
+    
+        .Login-container{
+            width: 100%;
+            padding: 60px;
+            background-color: #17191f;
+            border-radius: 40px;
+            color: #fdfdfd;
+            position: relative;
+            height: 90vh;  
+            top: 2rem;
+        }
+    
+        .signupheader, .loginheader {
+            display: flex;
+            align-items: center;
+            justify-content:space-between;
+            margin-bottom: 30px;
+            position: relative;
+            top: 2rem;
+        
+        }
+        
+        .headersignup, .headerlogin{
+            font-size: 30px;
+            font-weight: bold;
+            color: #050505;
+        }
+    
+        .close-button {
+            padding: 10px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #000000;
+            cursor: pointer;
+        }
+    
+        .login, .SignUP {
+            padding: 10px; /* Remove all padding */
+            background: none;
+            border: none;
+            font-size: 14px;
+            color: #080808;
+            cursor: pointer;
+        }
+    
+        /* Form styling */
+        .signup-form, .Login-form{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px;
+        }
+    
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2c2e38;
+            color: #fdfdfd;
+            outline: none;
+        }
+    
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+    
+        .verify-button {
+            padding: 0 15px;
+            background-color: #fbbf24;
+            border: none;
+            border-radius: 8px;
+            color: #1c1e26;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40%;
+        }
+    
+        .SignUp, .Login-btn{
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            background-color: #fbbf24;
+            color: #1c1e26;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    
+        /* Forgot Password Link */
+        .forgot-password-link {
+            color: #ffc107;
+            text-decoration: none;
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    
+        .forgot-password-link-login {
+            color: #ffc107;
+            text-decoration: none;
+            display: block;
+            font-size: 23px;
+        }
+    
+        .login-desktop-container, .signUp-desktop-container{
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+    
+        
+        .Login-desktop-main-container .trackiconlogin {
+            position: absolute;
+            width: 40%;
+            bottom: 54rem;
+            left: 34rem;
+        }
 
-}
+        .SignUp-desktop-main-container .trackiconlogin {
+            position: absolute;
+            width: 40%;
+            bottom: 54rem;
+            left: 34rem;
+        }
+    
+        .trackiconlogin {
+            position: relative;
+            width: auto; /* Default width */
+            height: auto;
+        }
+    
+        .login-desktop-container .trackiconloginleft{
+            position: absolute;
+            width: 70%;
+            transform: scaleX(-1);
+            top: 20rem;
+            right: 15rem;
+        }
+
+        .signup-desktop-container .trackiconloginleft{
+            position: absolute;
+            width: 70%;
+            transform: scaleX(-1);
+            top: 20rem;
+            right: 15rem;
+        }
+
+        .Login-txt h1, .SignUp-txt h1{
+            position: absolute;
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+        
+        .button-back-txt, .button-back-signup-txt{
+            display: flex;
+            position: relative;
+            gap: 20px;
+        }
+    
+      
+        @media (min-width: 320px) and (max-width: 424px){
+            .login-welcome-page, .signup-welcome-page{
+                display: none;
+            }
+            .login-desktop-container, .signup-desktop-container{
+                display: none;
+            }
+    
+            .SignUp-container{
+                padding:42px;
+            }
+    
+            .signup-form, .Login-form{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                bottom: 10px;
+                position: relative;
+            }
+    
+            
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2c2e38;
+            color: #fdfdfd;
+            outline: none;
+        }
+    
+        .login-desktop-container .trackiconloginleft{
+            display: none;
+        }
+    
+        }
+    
+        @media (min-width: 425px) and (max-width: 767px){
+            .login-welcome-page, .signup-welcome-page{
+                display: none;
+            }
+    
+            .login-desktop-container, .signup-desktop-container{
+                display: none;
+            }
+    
+            .SignUp-container{
+                padding:30px;
+            }
+    
+            .signup-form, .Login-form{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                bottom: 10px;
+                position: relative;
+            }
+    
+            
+            .input-field {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                border: none;
+                border-radius: 8px;
+                background-color: #2c2e38;
+                color: #fdfdfd;
+                outline: none;
+            }
+        
+            .login-desktop-container .trackiconloginleft{
+                display: none;
+            }
+        
+        }
+    
+        @media(min-width: 768px) and (max-width: 1023px) {
+    
+
+            .login-desktop-container, .signup-desktop-container{
+                background-color: #17191f;
+                display: flex;
+                padding: 1rem;
+                justify-content:space-between;
+                position: relative;
+                width: 50rem;
+                height: 30rem;
+                max-width: 70rem;
+                max-height:70rem;
+            } 
+
+            /**.signup-desktop-container{
+                background-color: #17191f;
+                display: flex;
+                padding: 1rem;
+                justify-content:space-between;
+                position: relative;
+                width: 50rem;
+                height: 30rem;
+                max-width: 70rem;
+                max-height:70rem;
+                top: 5rem;
+            }*/
+            .signup-form .input-field{                          
+                width: 100%;
+                padding: 8px;
+                font-size: 16px;
+                border: none;
+                border-radius: 8px;
+                background-color: #2c2e38;
+                color: #fdfdfd;
+                outline: none;                                    
+               
+            }
+            
+            .Login-desktop-main-container{
+            max-width: 50rem;
+            width: 40%;
+            position: relative;
+            }
+
+            .SignUp-desktop-main-container{
+            max-width: 50rem;
+            width: 42%;
+            position: relative;
+            }
+
+            /**.SignUp-desktop-main-container{
+                max-width: 50rem;
+                width: 40%;
+                position: relative;
+                bottom: 4rem;    
+            }*/
+        
+            .Login-form-desktop{
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                gap: 30px;
+                padding: 4px;
+                top: 7rem;
+                width: 17rem;
+            }
+
+
+        .SignUp-form-desktop{
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                gap: 30px;
+                padding: 1px;
+                top: 3em;
+                width: 18rem;
+           }
+        
+        .button-back-txt{
+            display: flex;
+            position: relative;
+            gap: 20px;
+            top: 3rem;
+        }
+
+        .button-back-signup-txt{
+            display: flex;
+            gap: 20px;
+            top: 1rem;
+            color:white ;
+            position: relative;
+        }
+    
+        .Login-txt h1{
+            position: absolute;
+            font-size: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .SignUp-txt h1{
+            position: absolute;
+            font-size: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            color: white;
+
+        }
+
+        .login-welcome-page{
+            color: #050505;
+            
+        }
+    
+        .login-welcome-page h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+    
+        .login-welcome-page p {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            font-weight: bold;
+        }
+
+        .signup-welcome-page{
+            color: #050505;
+            position: relative;
+        
+        }
+
+        .signup-welcome-page h1{
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .signup-welcome-page p{
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            font-weight: bold;
+        }
+       
+        .image-container-login {
+            position: relative;
+            margin: 50px 50px;
+            width: 30%;
+            padding: 1rem;
+        }
+        .image-container-login .motorbg-login {
+            position: absolute;
+            width: 17rem;
+            height: auto;
+            bottom: 1px;
+        }
+    
+        .bike-login {
+            position: relative;;
+            width: 130%;
+            height: 105%;
+            border-radius:10px;
+        }
+    
+        .image-container-login .location-login {
+            position: absolute;
+            width:26%; /* Adjust to fill the container */
+            height: 26%;
+            bottom: 17rem;
+            left: 5px;
+            border-radius: 50px;
+        }
+    
+        .login-main-container, .signup-main-container {
+            display: none;
+        }
+    
+        .forgot-password-link-login {
+            font-size: 17px;
+        }
+    
+        .login-desktop-container .trackiconloginleft{
+            display: none;
+        }
+
+        .signup-desktop-container .trackiconloginleft{
+            display: none;
+        }
+    
+    
+        }
+    
+        @media(min-width: 1024px) {
+    
+            .login-desktop-container,.signup-desktop-container{
+                background-color: #17191f;
+                display: flex;
+                padding: 1rem;
+                justify-content:space-between;
+                position: relative;
+                width: 50rem;
+                height: 30rem;
+                max-width: 70rem;
+                max-height:70rem;
+            } 
+
+            .Login-desktop-main-container{
+                max-width: 50rem;
+                width: 40%;
+                position: relative;
+            }
+
+            .SignUp-desktop-main-container{
+                max-width: 50rem;
+                width: 40%;
+                position: relative;
+                bottom: 5rem;    
+            }
+        
+            .Login-form-desktop, .SignUp-form-desktop{
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                gap: 30px;
+                padding: 4px;
+                top: 7rem;
+                width: 17rem;
+            }
+        
+            .button-back-txt{
+                top: 3rem;
+            }
+
+            .button-back-signup-txt{
+                color:rgb(255, 253, 253) ;
+                top: 5.5rem; 
+            }
+        
+            .Login-txt h1{
+                font-size: 34px;
+            }
+
+            .SignUp-txt h1{
+                color: white;
+            }
+
+            .login-welcome-page{
+                color: #000000;
+            }
+        
+            .login-welcome-page h1 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+                font-weight: bold;
+            }
+        
+            .login-welcome-page p {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+                font-weight: bold;
+            }
+        
+        
+            .image-container-login {
+                position: relative;
+                margin: 50px 50px;
+                width: 30%;
+                padding: 1rem;
+            }
+            .image-container-login .motorbg-login {
+                position: absolute;
+                width: 18rem;
+                height: auto;
+                bottom: 0.1rem;
+            }
+        
+            .bike-login {
+                position: relative;        
+                border-radius:10px;           
+                width: 150%;
+                height: 115%;
+             
+            }
+        
+            .image-container-login .location-login {
+                position: absolute;
+                width:26%; /* Adjust to fill the container */
+                height: 26%;
+                bottom: 17rem;
+                left: 5px;
+                border-radius: 50px;
+            }
+        
+        
+            .login-main-container, .signup-main-container {
+                display: none;
+            }
+        
+            .forgot-password-link-login {
+                font-size: 17px;
+            }
+        
+            .super-main-container{
+                position: relative;
+                text-align: center;
+                align-items: center;
+                display:inline;
+                width: 100vw;
+                height: 100vh;
+                bottom: 1rem;
+            }
+    
+            .super-main-container .login-welcome-page{
+                width: 100%;
+                height: 60%;
+                position: relative;
+                display:block;
+            }
+
+            .super-main-container .signup-welcome-page{
+                width: 100%;
+                height: 60%;
+                position: relative;
+                display:block;
+            }
+    
+        
+            .image-container-login .motorbg-login {
+                position: absolute;
+                width: 18rem;
+                height: auto;
+                bottom: 0.1rem;
+            }
+    
+          
+            .Login-desktop-main-container{
+                max-width: 50rem;
+                width: 40%;
+                position: relative;
+            }
+    
+            .forgot-password-link-login {
+                font-size: 15px;
+            }
+    
+            .image-container-login .location-login {
+                position: absolute;
+                width: 32%; /* Adjust to fill the container */
+                height: 30%;
+                bottom: 16.5rem;
+                left: 5px;
+                border-radius: 50px;
+            }
+    
+    
+            .login-welcome-page h1 {
+                font-size: 2.2rem;
+                font-weight:bolder;
+            }
+    
+            .login-welcome-page p {
+                font-size: 1rem;
+                font-weight:650;
+            }
+
+            .signup-welcome-page{
+                color: #050505;
+                position: relative;
+            
+            }
+    
+            .signup-welcome-page h1{
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+                font-weight: bold;
+            }
+    
+            .signup-welcome-page p{
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+                font-weight: bold;
+            }
+           
+            
+            .Login-desktop-main-container .trackiconlogin {
+                position: absolute;
+                width: 75%;
+                bottom: 23rem;
+                left: 13rem;
+            }
+    
+            .login-desktop-container .trackiconloginleft{
+                position: absolute;
+                width: 70%;
+                transform: scaleX(-1);
+                top: 20rem;
+                right: 15rem;
+            }
+
+            .SignUp-desktop-main-container .trackiconlogin {
+                position: absolute;
+                width: 75%;
+                bottom: 19rem;
+                left: 13rem;
+            }
+
+            .signup-desktop-container .trackiconloginleft{
+                position: absolute;
+                width: 70%;
+                transform: scaleX(-1);
+                top: 20rem;
+                right: 15rem;
+            }
+        }
+    
+        @media(min-width: 2560px) {
+            .super-main-container{
+                position: relative;
+                text-align: center;
+                align-items: center;
+                display:inline;
+                width: 100vw;
+                height: 100vh;
+            }
+    
+            .super-main-container .login-welcome-page{
+                width: 100%;
+                height: 60%;
+                position: relative;
+                display:block;
+            }
+
+            .super-main-container .signup-welcome-page{
+                width: 100%;
+                height: 60%;
+                position: relative;
+                display:block;
+            }
+    
+           .login-welcome-page h1 {
+                font-size: 4rem;
+                margin-bottom: 0.8rem;
+                font-weight: bold;
+            }
+
+            .signup-welcome-page h1{
+                font-size: 4rem;
+                margin-bottom: 0.8rem;
+                font-weight: bold;
+            }
+    
+           .login-welcome-page p {
+                font-size: 1.7rem;
+                margin-bottom: 0.8rem;
+                font-weight: bold;
+            }
+
+            .signup-welcome-page p{
+                font-size: 1.7rem;
+                margin-bottom: 0.8rem;
+                font-weight: bold;
+            }
+    
+            .login-desktop-container, .signup-desktop-container {
+                width: 70rem;
+                height: 50rem;
+                max-width: 90rem;
+                max-height:60rem;
+                background-color: #1A1B28;
+                position: relative;
+            }
+    
+            .Login-desktop-main-container {
+                max-width: 50rem;
+                width: 45%;
+                position: relative;
+                text-align: center;
+                align-items: center;
+            }
+
+            .SignUp-desktop-main-container{
+                max-width: 50rem;
+                width: 45%;
+                position: relative;
+                text-align: center;
+                align-items: center;
+                bottom: 5rem;    
+            }
+            
+            .image-container-login {
+                position: relative;
+                margin: 50px 50px;
+                width: 45%;
+                padding: 1rem;
+            }
+    
+                
+            .image-container-login .motorbg-login {
+                position: absolute;
+                width: 90%;
+                height: auto;
+                bottom: 40px;
+            }
+    
+            .bike-login {
+                position: relative;;
+                width: 90%;
+                height: 90%;
+                border-radius:10px;
+                top: 4rem;
+            }
+    
+            .image-container-login .location-login {
+                position: absolute;
+                width:26%; /* Adjust to fill the container */
+                height: 26%;
+                bottom: 30rem;
+                left: 5px;
+                border-radius: 50px;
+            }
+    
+            .button-back-txt {
+                display: flex;
+                position: absolute;
+                gap: 20px;
+                top: 5rem;
+            }
+    
+            .button-back-txt .material-symbols-outlined{
+                font-size: 40px;
+                top: 1rem;
+            }
+            
+            .Login-txt h1{
+                position: relative;
+                font-size: 45px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                gap: 20px;
+            }
+    
+            .Login-form-desktop, .SignUp-form-desktop{
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                gap: 30px;
+                font-size: 2rem;
+                padding: 4px;
+                top: 15rem;
+                width: 30rem;
+            }
+    
+            .Login-form-desktop .input-field{
+                height: 4.5rem;
+                gap: 30px;
+                top: 5rem;
+                font-size: 20px;
+            }
+    
+            .SignUp, .Login-btn {
+                width: 100%;
+                padding: 15px;
+                font-size: 25px;
+                font-weight: bold;
+                border: none;
+                border-radius: 8px;
+                background-color: #fbbf24;
+                color: #1c1e26;
+                cursor: pointer;
+                margin-top: 10px;
+            }
+    
+            .forgot-password-link-login {
+                color: #ffc107;
+                text-decoration: none;
+                display: block;
+                margin-top: 15px;
+                font-size: 23px;
+            }
+    
+            .Login-desktop-main-container .trackiconlogin {
+                position: absolute;
+                width: 70%;
+                bottom: 40rem;
+                left: 22rem;
+            }
+    
+            .login-desktop-container .trackiconloginleft{
+                position: absolute;
+                width: 60%;
+                transform: scaleX(-1);
+                top: 35rem;
+                right: 29rem;
+            }
+
+            .SignUp-desktop-main-container .trackiconlogin {
+                position: absolute;
+                width: 70%;
+                bottom: 36rem;
+                left: 22rem;
+            }
+
+            .signup-desktop-container .trackiconloginleft{
+                position: absolute;
+                width: 60%;
+                transform: scaleX(-1);
+                top: 35rem;
+                right: 29rem;
+            }
+
+            .login-main-container, .signup-main-container {
+                display: none;
+            }
+    
+            
+        }
+    
+ 
