@@ -9,6 +9,7 @@ import MapboxComponent from '../../Components/MapboxComponent';
 import Loader from '../../Loader/Loader';
 
 import SwipeableDeviceCards from './SwipeableDeviceCards';
+import { toast, ToastContainer } from 'react-toastify'
 
 import './Monitor.css'; // Include your other styles
 
@@ -84,15 +85,15 @@ const Monitor = () => {
         // Persist the updated user in localStorage
         localStorage.setItem("isNewUser", "false");  // Store the updated isNewUser flag in localStorage
 
-        alert("Device successfully added to your account.");
+        toast.success("Device successfully added to your account.");
         setIsModalOpen(false); // Close modal
         setDeviceIdInput(""); // Reset input field
       } else {
-        alert(data.message || "Failed to add device. Please try again.");
+        toast.error(data.message || "Failed to add device. Please try again.");
       }
     } catch (error) {
       console.error("Error adding device:", error);
-      alert("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     }
   }
 
@@ -209,6 +210,7 @@ const Monitor = () => {
               </div>
             )}
         </div>
+        <ToastContainer/> 
     </div>
   );
 };

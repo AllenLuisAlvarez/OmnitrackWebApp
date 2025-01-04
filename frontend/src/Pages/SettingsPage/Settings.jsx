@@ -23,7 +23,8 @@ export const Settings = () => {
   };
 
   const handleLogOutClick = () => {
-    logoutUser(); 
+    // navigate("/frontend/src/Pages/LoginSignUpPage/Login.jsx")
+    logoutUser();
   };
 
   const toggleModal = () => {

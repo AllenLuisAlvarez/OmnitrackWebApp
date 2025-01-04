@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import { UserContext } from '../../Components/UserContext';
 import useMediaQuery from '../MonitoringPage/useMediaQuery'; // Assuming you already have this custom hook
+import { toast, ToastContainer } from 'react-toastify'
+
 
 
 const Profile = ({ onBack }) => {
@@ -92,7 +94,7 @@ const Profile = ({ onBack }) => {
 
     const handleAddImageClick = async () => {
         if (!selectedFile) {
-            alert("Please select an image first!");
+            toast.error("Please select an image first!");
             return;
         }
 
@@ -116,11 +118,11 @@ const Profile = ({ onBack }) => {
                 if (response.data.profileImage) localStorage.setItem("profileImage", response.data.profileImage);
                 setIsModalOpen(false);
             } else {
-                alert(response.data.message || "Failed to update profile image.");
+                toast.error(response.data.message || "Failed to update profile image.");
             }
         } catch (error) {
             console.error("Error updating profile image:", error);
-            alert("An error occurred. Please try again.");
+            toast.error("An error occurred. Please try again.");
         }
     };
 
@@ -140,11 +142,11 @@ const Profile = ({ onBack }) => {
             localStorage.removeItem("profileImage"); // Remove from localStorage
             setIsModalOpen(false);
           } else {
-            alert(response.data.message || "Failed to remove profile image.");
+            toast.error(response.data.message || "Failed to remove profile image.");
           }
         } catch (error) {
           console.error("Error removing profile image:", error);
-          alert("An error occurred. Please try again.");
+          toast.error("An error occurred. Please try again.");
         }
     };
       

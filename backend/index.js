@@ -116,7 +116,9 @@ app.post("/login", async (req, res) => {
     const { username, password } = req.body;
   
     if (!username || !password) {
-      return res.status(400).json({ message: "Username and password are required" });
+      return res.status(400).json({ 
+        id: "LoginError",
+        message: "Username and password are required" });
     }
   
     try {
@@ -594,6 +596,43 @@ app.patch('/remove-image', async (req, res) => {
     return res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
+
+
+// --------------- POST REQUEST FROM ESP32 HANDLER --------------- //
+
+app.post("/insert_gps", async (req, res) => {
+  const { module, latitude, longitude } = req.body;
+
+  // Validate required fields
+  if (!module || latitude == null || longitude == null) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
+
+  try {
+    // Format timestamp as YYYY-MM-DD HH:mm:ss
+    const now = new Date();
+    const formattedTimestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+    // Save GPS data to Firebase
+    const ref = db.ref("coordinates");
+    const newEntry = {
+      Module: module,
+      Latitude: latitude,
+      Longitude: longitude,
+      Timestamp: formattedTimestamp, // Use formatted timestamp
+    };
+
+    await ref.push(newEntry); // Push to Firebase Realtime Database
+    res.status(200).json({
+      message: "GPS data inserted successfully",
+      //data: newEntry,
+    });
+  } catch (error) {
+    console.error("Failed to insert GPS data:", error);
+    res.status(500).json({ message: "Failed to insert GPS data", error });
+  }
+});
+
 
 // Start server
 app.listen(PORT, () => {

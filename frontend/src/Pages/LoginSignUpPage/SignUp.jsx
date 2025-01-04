@@ -7,7 +7,7 @@ import motorbg from '../images/motorbg.png';
 import trackiconlogin from '../images/motoricon.png'
 
 
-const SignUp=()=>{
+const SignUp = () => {
     const navigate = useNavigate();
 
     const handleLoginClick = () => {
