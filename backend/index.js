@@ -49,8 +49,8 @@ const serviceAccount = {
   token_uri: process.env.FIREBASE_TOKEN_URI,
   auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_CERT_URL,
   client_x509_cert_url: process.env.FIREBASE_CLIENT_CERT_URL,
-  goole_api_key: process.env.REACT_APP_MAPS_API_KEY,
-  goole_map_id: process.env.REACT_APP_GOOGLE_MAP_ID, 
+  google_api_key: process.env.REACT_APP_MAPS_API_KEY,
+  google_map_id: process.env.REACT_APP_GOOGLE_MAP_ID, 
 };
 
 admin.initializeApp({
@@ -92,11 +92,11 @@ const upload = multer({
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.post("/maps-api-key", (req, res) => {
-  res.json({ apiKey: process.env.REACT_APP_MAPS_API_KEY });
+  res.json({ apiKey: serviceAccount.google_api_key });
 });
 
 app.post("/maps-google-id", (req, res) => {
-  res.json({ mapsId: process.env.REACT_APP_GOOGLE_MAP_ID });
+  res.json({ mapsId: serviceAccount.google_map_id });
 });
 
 // Root endpoint
