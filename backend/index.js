@@ -27,13 +27,14 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(null, false); // Return false instead of throwing an error
+        callback(new Error("Not allowed by CORS")); // Proper error handling
       }
     },
     methods: ["GET", "POST", "PATCH"],
     credentials: true,
   })
 );
+
 
 
 // Initialize Firebase Admin SDK
