@@ -25,15 +25,16 @@ app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow requests from allowed origins
+        callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS")); // Block others
+        callback(null, false); // Return false instead of throwing an error
       }
     },
     methods: ["GET", "POST", "PATCH"],
-    credentials: true, // Allow cookies to be sent
-    })
-  );
+    credentials: true,
+  })
+);
+  
 
 // Initialize Firebase Admin SDK
 const serviceAccount = {
@@ -938,6 +939,6 @@ app.post("/update-password", async (req, res) => {
 
 
 // Start server
-server.listen(port, () => {
+server.listen(port, "0.0.0.0", () => {
   console.log(`Connected to backend on port ${port}`);
 });
