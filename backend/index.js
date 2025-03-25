@@ -16,6 +16,7 @@ import { fileURLToPath } from 'url';
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 8800;
 
 app.use(express.json()); 
 const allowedOrigins = ["http://localhost:3000", "http://ip:3000"];
@@ -937,6 +938,6 @@ app.post("/update-password", async (req, res) => {
 
 
 // Start server
-server.listen(8800, '0.0.0.0', () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log("Connected to backend on port 8800");
 });
