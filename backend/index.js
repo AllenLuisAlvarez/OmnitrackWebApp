@@ -938,6 +938,6 @@ app.post("/update-password", async (req, res) => {
 
 
 // Start server
-server.listen(port, '0.0.0.0', () => {
+server.listen(port, () => {
   console.log(`Connected to backend on port ${port}`);
 });
