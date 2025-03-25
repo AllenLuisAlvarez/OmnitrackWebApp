@@ -16,10 +16,10 @@ import { fileURLToPath } from 'url';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8800;
+const port = process.env.PORT || 3000;
 
 app.use(express.json()); 
-const allowedOrigins = ["http://localhost:3000", "http://ip:3000"];
+const allowedOrigins = ["http://localhost:3000", "http://ip:3000", "https://trackmoto.horsemendevs.com/"];
 
 app.use(
   cors({
