@@ -19,7 +19,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json()); 
-const allowedOrigins = ["http://localhost:3000", "http://ip:3000", "https://trackmoto.horsemendevs.com/" , "https://omnitrackwebapp.onrender.com"];
+const allowedOrigins = ["http://localhost:3000", "http://ip:3000", "https://trackmoto.horsemendevs.com" , "https://omnitrackwebapp.onrender.com"];
 
 app.use(
   cors({
