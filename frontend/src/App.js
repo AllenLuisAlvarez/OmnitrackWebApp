@@ -1,4 +1,6 @@
 import {BrowserRouter,Routes,Route} from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 import WelcomePage1 from "./Pages/WelcomePage/WelcomePage1";
 import WelcomePage2 from "./Pages//WelcomePage/WelcomePage2";
 
@@ -43,6 +45,7 @@ function App() {
 				</DeviceProvider>
 			</UserProvider>
 		</BrowserRouter>
+		<ToastContainer/>
     </div>
   );
 }

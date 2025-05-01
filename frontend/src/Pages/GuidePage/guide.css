@@ -1,18 +1,12 @@
 /* General Styles */
 
 .slide {
-  background: #444;
-  color: #fff;
-  transition: transform 400ms ease-out;
-  display: inline-block;
-  min-height: 100%;
-  width: 100vw;
+  flex: 0 0 100vw;
   height: 100vh;
-  position: relative;
-  z-index: 1;
+  background: #1B1F2D;
+  background-size: cover;
+  font-size: 3rem;
   text-align: center;
-  cursor: pointer;
-  overflow-x: hidden;
 }
 
 /* Carousel-Specific Styling */
@@ -23,8 +17,9 @@
   bottom: 0;
   right: 0;
   white-space: nowrap;
+  display: flex; /* FLEX! */
+  transition: transform 0.5s ease;
 }
-
 .carousel-input {
   position: absolute;
 }
@@ -210,4 +205,5 @@
 
 .guide-desc span{
   color: #EEB700;
+  font-weight: bold;
 }

@@ -15,6 +15,13 @@
     width: 30px;
     border-radius: 20px;
     cursor: pointer;
+    transition: 0.3s;
+}
+.back-button-manage:hover{
+    background-color: #e6c200;
+}
+.manage-back-icon:hover{
+    color: #333333;
 }
 .managedevices-container{
     width: 100%;
@@ -85,10 +92,57 @@
     border-radius: 4px;
     cursor: pointer;
 }
+.editable-device-form{
+    /* border: 2px solid green; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.editable-device-form label{
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 3px;
+    color: white;
+}
+.editable-device-form input{
+    background-color: #333741;
+}
+.editable-input{
+    border: white;
+    /* border: 2px solid green; */
+    border-radius: 2px;
+    padding-left: 8px;
+    margin-bottom: 3px;
+    color: white;
+    background-color: #333741;
+}
+.editable-input:focus{
+    background-color: #333741;
+}
+.color-manage-dev-icon{
+    transition: 0.3s;
+}
+.edit-manage-dev-icon:hover{
+    color: #e6c200;
+    cursor: pointer;
+}
+.color-manage-dev-icon:hover{
+    background-color: #e6c200;
+}
+.editable-input:focus{
+    outline-color: #e6c200;
+}
 .mdev-remove-button{
     width: 9em;
     font-size: 12px;
+    font-weight: bold;
     color: white;
+    transition: 0.3s;
+    width: 40%;
+}
+.mdev-remove-button:hover{
+    background-color: #e6c200;
+    color: #333333;
 }
 .mdev-change-color-button{
     width: 2.5em;
@@ -109,42 +163,64 @@
 /* Modal content */
 .modal-content-remove-device {
     background-color: #1B1F2D;
-    border: 1px solid #E0DEDE;
+    border: 1px solid #383636;
     color: #ffd700; /* Gold color */
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 5px;
     width: clamp(300px, 90%, 400px);
     text-align: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     height: 6em;
 }
+.remove-title{
+    /* border: 2px solid green; */
+    text-align: left;
+}
 .modal-content-remove-device h4{
     font-size: 12.5px;
+    margin-bottom: 4px;
+}
+.modal-content-remove-device h6{
+    font-weight: 300;
 }
 .mdev-button-remove{
+    /* border: 2px solid salmon; */
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     align-items: center;
     margin-top: 0.5em;
+    gap: 10px;
 }
 .modal-content-remove-device button {
     align-items: center;
     width: 6em;
     height: 2em;
     max-width: 240px;
-    background-color: #EEB700;
-    color: #333741; /* Match the modal's background */
+    background-color: #5F6368;
+    color: white; /* Match the modal's background */
     border: none;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: bold;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 400;
     cursor: pointer;
+}
+.modal-content-remove-device .cancel-remove-btn{
+    background-color: #1B1F2D;
+    border: 1.8px solid #333741;
+    transition: 0.3s;
+    font-weight: bold;
+}
+.modal-content-remove-device .confirm-remove-btn{
+    transition: 0.3s;
+    font-weight: bold;
 }
         
 .modal-content-remove-device button:hover {
-    background-color: #e6c200; /* Slightly darker gold for hover effect */
+    background-color: #e6c200; 
+    color: #333741;
 }
+
 
 @media (min-width:768px) {
     .back-button-manage{

@@ -12,14 +12,20 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { loginUser } = useContext(UserContext);
+  const { user, loginUser } = useContext(UserContext);
   const [isModalOpen, setIsModalOpen] = useState(false); // State for "Forgot Password" modal
   const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false); // State for verification modal
-  const [mobileNumber, setMobileNumber] = useState(""); // Mobile number input
+  const [email, setEmail] = useState(""); // Email Address input
   const [verificationCode, setVerificationCode] = useState(""); // Verification code input
   const [isNewPasswordModalOpen, setIsNewPasswordModalOpen] = useState(false); // State for new password modal
   const [newPassword, setNewPassword] = useState(""); // New password input
   const [confirmPassword, setConfirmPassword] = useState(""); // Confirm password input
+
+  const [errorFields, setErrorFields] = useState({
+    username: false,
+    password: false,
+  });
+  
 
   const handleSignUpClick = () => {
     navigate("/signup"); // Redirect to Sign Up page
@@ -36,7 +42,22 @@ const Login = () => {
   const handleLoginClick = async (e) => {
     e.preventDefault();
 
-    if (!username || !password) {
+    let hasError = false;
+    const newErrorFields = { username: false, password: false };
+  
+    if (!username) {
+      newErrorFields.username = true;
+      hasError = true;
+    }
+  
+    if (!password) {
+      newErrorFields.password = true;
+      hasError = true;
+    }
+  
+    setErrorFields(newErrorFields);
+
+    if (hasError) {
       setErrorMessage("Username and password are required.");
       return;
     }
@@ -61,6 +82,7 @@ const Login = () => {
         navigate("/Monitor");
       } else {
         setErrorMessage(data.message || "Login failed");
+        setErrorFields({ username: true, password: true });
       }
     } catch (error) {
       setErrorMessage("An error occurred. Please try again later.");
@@ -68,93 +90,83 @@ const Login = () => {
   };
 
   const handleForgotPasswordClick = () => {
+    setErrorMessage(""); // Clear previous error messages
     setIsModalOpen(true);
-    console.log("clicked");
   };
 
-  const handleSendResetCode = async (e) => {
-    e.preventDefault();
+  const [resetEmail, setResetEmail] = useState(""); // ✅ Store email locally
 
-    if (!mobileNumber) {
-      setErrorMessage("Please enter your mobile number.");
+  const handleSendResetCode = async (e) => {
+    e.preventDefault(); // ✅ Prevent page reload
+  
+    if (!email) {
+      setErrorMessage("Please enter your email.");
       return;
     }
-
-     // Mock sending reset code
-  setTimeout(() => {
-    alert("Mock: Reset code sent to your mobile number.");
-    setIsModalOpen(false); // Close the modal for mobile number
-    setIsVerificationModalOpen(true); // Open verification modal
-    setMobileNumber(""); // Clear mobile number input
-  }, 1000); // Simulate a 1-second delay
-
+  
     try {
       const response = await fetch("http://localhost:8800/forgot-password", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ mobileNumber }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
       });
-
+  
       const data = await response.json();
-
-      if (response.ok) {
-        alert("Reset code sent to your mobile number.");
-        setIsModalOpen(false);
-        setIsVerificationModalOpen(true); // Open verification modal
-        setMobileNumber("");
-      } else {
-        setErrorMessage(data.message || "Failed to send reset code.");
+  
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send reset code.");
       }
+  
+      console.log("Stored email for OTP verification:", email);
+      setResetEmail(email); // ✅ Store email in local state (not UserContext)
+  
+      alert("OTP sent successfully!");
+      setIsModalOpen(false);
+      setIsVerificationModalOpen(true);
     } catch (error) {
-      setErrorMessage("An error occurred. Please try again later.");
+      setErrorMessage(error.message);
     }
   };
 
   const handleVerifyCode = async (e) => {
     e.preventDefault();
-
+  
     if (!verificationCode) {
       setErrorMessage("Please enter the verification code.");
       return;
     }
-     // Mock verification
-  setTimeout(() => {
-    if (verificationCode === "123456") { // Mocked correct code
-      alert("Mock: Code verified successfully!");
-      setIsVerificationModalOpen(false); // Close verification modal
-      setIsNewPasswordModalOpen(true); // Open the new password modal
-      setVerificationCode(""); // Clear verification code input
-    } else {
-      setErrorMessage("Invalid verification code. Please try again.");
+  
+    if (!resetEmail) {  // ✅ Check if email is stored
+      setErrorMessage("Something went wrong. Please request OTP again.");
+      return;
     }
-  }, 1000); // Simulate a 1-second API delay
+  
     try {
+      console.log("Verifying OTP for email:", resetEmail); // ✅ Debugging
+  
       const response = await fetch("http://localhost:8800/verify-code", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ verificationCode }),
+        body: JSON.stringify({ email: resetEmail, otp: verificationCode }), // ✅ Use resetEmail
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         alert("Code verified successfully! Please reset your password.");
         setIsVerificationModalOpen(false);
+        setIsNewPasswordModalOpen(true);
         setVerificationCode("");
-        navigate("/reset-password"); // Redirect to the password reset page
       } else {
-        setErrorMessage(data.message || "Invalid verification code.");
+        setErrorMessage(data.error || "Invalid verification code.");
       }
     } catch (error) {
       setErrorMessage("An error occurred. Please try again later.");
     }
   };
-
-  const handleSaveNewPassword = (e) => {
+  const handleSaveNewPassword = async (e) => {
     e.preventDefault();
   
     if (!newPassword || !confirmPassword) {
@@ -167,16 +179,40 @@ const Login = () => {
       return;
     }
   
-    // Mock password reset success
-   // Mock saving the new password
-  setTimeout(() => {
-    alert("Mock: Password reset successfully!");
-    setIsNewPasswordModalOpen(false); // Close the new password modal
-    setNewPassword(""); // Clear inputs
-    setConfirmPassword("");
-    navigate("/login"); // Redirect back to the login page
-  }, 1000); // Simulate a 1-second API delay
+    if (!resetEmail) { // ✅ Check if email is stored
+      setErrorMessage("Something went wrong. Please request OTP again.");
+      return;
+    }
+  
+    try {
+      console.log("Updating password for email:", resetEmail); // ✅ Debugging
+  
+      const response = await fetch("http://localhost:8800/update-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: resetEmail, newPassword }), // ✅ Use resetEmail
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        alert("Password reset successfully!");
+        setIsNewPasswordModalOpen(false);
+        setNewPassword("");
+        setConfirmPassword("");
+        navigate("/login");
+      } else {
+        setErrorMessage(data.error || "Failed to reset password.");
+      }
+    } catch (error) {
+      setErrorMessage("An error occurred. Please try again later.");
+    }
   };
+  
+  
+  
 
   return (
     <div className="starting-container">
@@ -190,7 +226,7 @@ const Login = () => {
               &times;
             </span>
             <h2>Verify Reset Code</h2>
-            <p>Enter the code sent to your mobile number.</p>
+            <p>Enter the code sent to your Email Address.</p>
             <form onSubmit={handleVerifyCode}>
               <input
                 type="text"
@@ -253,13 +289,13 @@ const Login = () => {
               &times;
             </span>
             <h2>Forgot Password</h2>
-            <p>Enter your mobile number to receive a password reset code.</p>
+            <p>Enter your registered Email Address to receive a password reset code.</p>
             <form onSubmit={handleSendResetCode}>
               <input
-                type="text"
-                placeholder="Mobile Number"
-                value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value)}
+                type="text" 
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="input-field"
               />
               <button type="submit" className="Login-btn">
@@ -272,11 +308,6 @@ const Login = () => {
       )}
    
     <div className="super-main-container">
-       <div className="login-welcome-page">
-            <h1>Welcome to TrackMoto</h1>
-            <p>Track Your Treasures with Ease</p>
-            <p>Locate What Matters Most.</p>
-        </div>
      </div>
     <div className="main-container">
     <div class="login-desktop-container">
@@ -293,13 +324,15 @@ const Login = () => {
         <span className="material-symbols-outlined">arrow_back</span>
         <div className="Login-txt">
           <h1>Login</h1>
+          <p>Input your credentials to login</p>
+
         </div>
         </div>
         <form className="Login-form-desktop">
           <input
             type="text"
             placeholder=" "
-            className="input-field"
+            className={`input-field ${errorFields.username ? "error-outline" : ""}`}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -307,7 +340,7 @@ const Login = () => {
           <input
             type="password"
             placeholder=" "
-            className="input-field"
+            className={`input-field ${errorFields.password ? "error-outline" : ""}`}
             value={password.trim()}
             onChange={(e) => setPassword(e.target.value)}
           />

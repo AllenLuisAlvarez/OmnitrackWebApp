@@ -188,7 +188,7 @@ const ManageDevices = ({ onBack }) => {
         <div className="managedevices-container">
             <div className="managedevices-header">
                 <div className="back-button-manage" onClick={handleBackClick}>
-                    <span className="material-symbols-outlined">arrow_back</span>
+                    <span className="material-symbols-outlined manage-back-icon">arrow_back</span>
                 </div>
                 <div className="managedevices-title">
                     <p>Manage Devices</p>
@@ -203,12 +203,17 @@ const ManageDevices = ({ onBack }) => {
                                 <div className="top-mdev">
                                     <div className="mdev-text-div">
                                         {selectedDeviceId === device.id && isEditing ? (
-                                            <input
-                                                type="text"
-                                                value={updatedName}
-                                                onChange={handleNameChange}
-                                                className="editable-input"
-                                            />
+                                            <form className='editable-device-form'>
+                                                <label>Device Name</label>
+                                                <input
+                                                    type="text"
+                                                    value={updatedName}
+                                                    placeholder="Input Device"
+                                                    onChange={handleNameChange}
+                                                    className="editable-input"
+                                                />
+
+                                            </form>
                                         ) : (
                                             <p>Device Name: {device.Name}</p>
                                         )}
@@ -216,7 +221,7 @@ const ManageDevices = ({ onBack }) => {
                                     </div>
                                     <div className="mdev-edit-icon">
                                         <span
-                                            className="material-symbols-outlined"
+                                            className="material-symbols-outlined edit-manage-dev-icon"
                                             onClick={() => {
                                                 if (isEditing && selectedDeviceId === device.id) {
                                                     handleSaveClick();
@@ -232,7 +237,7 @@ const ManageDevices = ({ onBack }) => {
                             </div>
 
                             <div className="bottom-mdev">
-                            <button className="mdev-change-color-button" 
+                            <button className="mdev-change-color-button color-manage-dev-icon" 
                                 style={{
                                     color: device.Color || '#000000',
                                     cursor: isEditing && selectedDeviceId === device.id? 'pointer' : 'not-allowed', // Change cursor based on `isEditing`
@@ -271,12 +276,15 @@ const ManageDevices = ({ onBack }) => {
                 {isModalOpen && (
                     <div className="modal-overlay-remove-device" >
                         <div className="modal-content-remove-device" onClick={(e) => e.stopPropagation()}>
-                        <h4>Are you sure you want to remove your device?</h4>
+                        <div className='remove-title'>
+                            <h4>Are you sure you want to remove this device?</h4>
+                            <h6>This cannot be undone</h6>
+                        </div>
                             <div className="mdev-button-remove">
+                                <button onClick={toggleModal} className='cancel-remove-btn'>Cancel</button>
                                 <button onClick={() => {
                                 handleConfirmDelete(selectedDeviceId,selectedDeviceModule)
-                                toggleModal()}}>Confirm</button>
-                                <button onClick={toggleModal}>Cancel</button>
+                                toggleModal()}} className='confirm-remove-btn'>Confirm</button>
                             </div>
                         </div>
                     </div>

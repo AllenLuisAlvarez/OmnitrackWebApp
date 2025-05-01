@@ -1,6 +1,21 @@
 .test-body{
     background-color: #333741;
 }
+.TMLogo-container{
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+}
+.TMLogo-container img{
+  width: 10em;
+  height: 100%;
+  object-fit: contain;
+  margin-right: 2em;
+  /* border: 2px solid blueviolet; */
+}
 .parent-container{
     display: flex;
     flex-direction: column;
@@ -57,8 +72,6 @@
 .device-card {
     background-color: #1B1F2D;
     border-radius: 8px;
-    padding: 10px;
-    margin-right: 10px;
     min-width: 270px; /* Reduce min-width to fit more cards in smaller screen */
     max-width: 200px;
     min-height: 120px;
@@ -70,19 +83,22 @@
     color: #fff;
     scroll-snap-align: center;
     box-sizing: border-box;
-    gap: 1em;
     font-size: 13px;
+    /* border: 1px solid green; */
 }
 .left_side{
     display: block;
     text-align: left;
+    /* border: 1px solid salmon; */
 }
+
 .right_side span{
-    font-size: 70px;
-    right: -1;
+    font-size: 75px;
     color: #EEB700;
     position: relative;
-    bottom: 30px;
+    bottom: 15px;
+    /* border: 1px solid salmon; */
+
 }
 .device-card .status {
     color: #f1c40f;
@@ -110,14 +126,18 @@
     font-size: 12px;
     font-weight:600;
 }
+.card-header{
+  /* border: 2px solid wheat; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+}
 .status-bar{
-    position: relative;
-    right: 9.5rem;
-    margin-bottom: 10px;
     min-width: 2em;
     width: 3px;
     height: 1em;
-    background-color: #34C759;
+    /* background-color: #34C759; */
     border-radius: 18px;
 }
 
@@ -192,6 +212,8 @@
 
 .monitor-title{
     display: none;
+    /* border: 2px solid green; */
+    
 }
 
 /* The switch - the box around the slider */
@@ -278,6 +300,13 @@
   }
 
 @media (min-width: 320px) {
+  .my-location-switch{
+    /* border: 1px solid salmon; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+  }
     .device-card {
         background-color: #1B1F2D;
         border-radius: 8px;
@@ -294,7 +323,7 @@
         color: #fff;
         scroll-snap-align: center;
         box-sizing: border-box;
-        gap: 1em;
+        /* gap: 1em; */
         font-size: 12px;
         font-weight: 600;
     }
@@ -306,8 +335,8 @@
     /* Base Menu Styles */
 #menu {
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: 50px;
+    right: 10px;
     z-index: 1000;
   }
   
@@ -356,7 +385,7 @@
   .nav {
     position: absolute;
     top: 50px;
-    left: 0;
+    right: 0;
     width: 200px;
     background-color: #1B1F2D;
     border-radius: 8px;
@@ -431,6 +460,7 @@
     }
     .History-container-mobile{
         display: none;
+        /* border: 2px solid blue; */
     }
 
     .navbar-container:hover .icon-text {
@@ -451,22 +481,44 @@
     .monitor-title{
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-evenly;
         align-items: center;
         margin-top: 1em;
-        padding-left: 2em;
+        /* padding-left: 2em; */
         position: relative;
+        height: 10%;
     }
     .monitor-title h5{
         font-size: 1.5em;
         color: #BDBDBD;
     }
     .monitor-title img{
-        height: 50px;
-        width: 50px;
+        /* height: 50px; */
+        /* width: 50px; */
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+    }
+    .title-text{
+      /* border: 2px solid blue; */
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 30%;
+      height: 100%;
+      gap: 1em;
+    }
+    .motor-icon{
+      width: 15%;
+      height: 100%;
+      /* border: 2px solid red; */
+    }
+    .motor-icon img{
+      /* border: 2px solid purple; */
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
     }
     .profile-icon-container {
         display: flex; /* Ensure flex layout */
@@ -630,11 +682,14 @@
 .History-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     color: #BDBDBD;
     font-size: 18px;
     position: relative;
-    left: 5em;
+    /* left: 5em; */
+    height: 100%;
+    width: 30%;
+    /* border: 2px solid brown; */
     gap: 1em; /* Adding some spacing between elements */
 }
 

@@ -5,6 +5,7 @@ import bikeImage from '../images/bike.png';
 import locationImage from '../images/location.png';
 import motorbg from '../images/motorbg.png';
 import trackicon from '../images/motoricon.png';
+import TMLogo from '../images/TMLogoW.png';
 
 const WelcomePage2= ()=>{
     const navigate = useNavigate();
@@ -20,9 +21,11 @@ const WelcomePage2= ()=>{
     <div class="container">
     <div class="desktop-container">
         <header class= "welcomepageheader">
+            <div className="TMLogo-container-welcome">
+                <img src={TMLogo} alt="TM_Logo" className="TML" />
+            </div>
             <h1>Welcome to <span class="trackmoto-text">TrackMoto</span></h1>
-            <p>Track Your Treasures with Ease</p>
-            <p>Locate What Matters Most.</p>
+            <p>Track Your Ride with Ease</p>
             <button class="SignUp-button-desktop" onClick={handleSignUp}>Sign Up</button>
             <button class="Login-button-desktop" onClick={handleLogin}>Log In</button>
             <img class="trackicon" src={trackicon} alt= "trackicon"></img>

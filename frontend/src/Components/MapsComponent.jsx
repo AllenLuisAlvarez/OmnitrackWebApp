@@ -7,7 +7,7 @@ import motorIcon from "../Pages/images/motor2.png";
 
 //import * as turf from "@turf/turf";
 
-const MapsComponent = ({ activeDevice, selectedFilter, selectedDate, geofenceStatus, isTracking, isLoaded}) => {
+const MapsComponent = ({ activeDevice, selectedFilter = "today", selectedDate, geofenceStatus, isTracking, isLoaded}) => {
     const mapContainerRef = useRef(null);
     const mapRef = useRef(null);
     const markersRef = useRef({});
@@ -23,7 +23,16 @@ const MapsComponent = ({ activeDevice, selectedFilter, selectedDate, geofenceSta
 
     const { devices, locations, setLocations, coordinates, updateDeviceDistances } = useDevices();
     const { userLocation } = useContext(UserContext);
-    const mapId = process.env.REACT_APP_GOOGLE_MAP_ID;
+    const mapId = "9b8de3b2ac66ed81";
+    
+    const [coordinatesReady, setCoordinatesReady] = useState(false);
+
+    useEffect(() => {
+        if (coordinates.length > 0) {
+            setCoordinatesReady(true);
+        }
+    }, [coordinates]);
+
     /*
     const calculateDistance = (userLocation, moduleLocation) => {
         if (!userLocation || !moduleLocation) return "N/A";
@@ -395,13 +404,13 @@ const MapsComponent = ({ activeDevice, selectedFilter, selectedDate, geofenceSta
     
     const animatePulsingCircle = (circle) => {
         let radius = 0;
-        const maxRadius = 3;
+        const maxRadius = 35;
         let isAnimating = true; // Add a flag to stop animation if needed
     
         const pulse = () => {
             if (!circle.getMap() || !isAnimating) return; // Stop if removed
     
-            radius += 0.03;
+            radius += 0.4;
             if (radius >= maxRadius) radius = 0;
     
             const opacity = 1 - radius / maxRadius;
@@ -421,7 +430,7 @@ const MapsComponent = ({ activeDevice, selectedFilter, selectedDate, geofenceSta
 
     // MAP MARKERS
     useEffect(() => { 
-        if (!mapRef.current || !coordinates.length) return;
+        if (!mapRef.current || !coordinates || !coordinates.length) return;
     
         const today = new Date().toISOString().split("T")[0];
     
@@ -579,8 +588,8 @@ const MapsComponent = ({ activeDevice, selectedFilter, selectedDate, geofenceSta
                 return updatedLocations;
             });
         }
-    }, [selectedFilter, selectedDate, setLocations, coordinates]);
-    // END OF MAP MARKERS
+    }, [coordinatesReady,selectedFilter, selectedDate, setLocations, coordinates]);
+    // END OF MAP MARKERS   
     
     // MARKER GEOFENCES
     useEffect(() => {
@@ -679,29 +688,88 @@ const MapsComponent = ({ activeDevice, selectedFilter, selectedDate, geofenceSta
         return () => clearInterval(interval); // Cleanup on unmount or toggle change
     }, [locations, geofenceStatus]);    
     
-
-    // MARKER TRACK
+    //Route Marker Tracker
+    const drawDirectionsRoute = (encodedPolyline, color, module) => {
+        const decodedPath = window.google.maps.geometry.encoding.decodePath(encodedPolyline);
+      
+        if (routePolylinesRef.current[module]) {
+          routePolylinesRef.current[module].setMap(null);
+        }
+      
+        const routePolyline = new window.google.maps.Polyline({
+          path: decodedPath,
+          geodesic: true,
+          strokeColor: color,
+          strokeOpacity: 1,
+          strokeWeight: 4,
+          map: mapRef.current
+        });
+      
+        routePolylinesRef.current[module] = routePolyline;
+      };
+      
     useEffect(() => {
-        if (!mapRef.current || !activeDevice) return;
-    
-        // Find latest coordinate for the active module
+        if (!mapRef.current) return;
+
+        // If tracking is OFF, remove the route line
+        if (!activeDevice) {
+            Object.values(routePolylinesRef.current).forEach(polyline => polyline.setMap(null));
+            routePolylinesRef.current = {};
+            return;
+        }
+
+        // If tracking is ON, find latest coordinate
         const latestCoord = coordinates
             .filter(coord => coord.Module === activeDevice)
-            .reduce((latest, current) => 
-                !latest || new Date(current.Timestamp) > new Date(latest.Timestamp) ? current : latest,
+            .reduce((latest, current) =>
+            !latest || new Date(current.Timestamp) > new Date(latest.Timestamp) ? current : latest,
             null);
-    
+
+        if (!latestCoord || !userLocation) return;
+
+        const lat = parseFloat(latestCoord.Latitude);
+        const lng = parseFloat(latestCoord.Longitude);
+
+        // Center and zoom to device
+        mapRef.current.panTo({ lat, lng });
+        mapRef.current.setZoom(18);
+
+        // Draw route from userLocation to device
+        const fetchRoute = async () => {
+            const route = await fetchGoogleRoute(
+            { lat: userLocation.lat, lon: userLocation.lon },
+            { lat: latestCoord.Latitude, lng: latestCoord.Longitude }
+            );
+
+            const device = devices.find(d => d.Module === activeDevice);
+            const color = device?.Color || "#000";
+
+            if (route) {
+            drawDirectionsRoute(route, color, activeDevice);
+            }
+        };
+
+        fetchRoute();
+    }, [activeDevice, coordinates, userLocation, devices]);
+
+    useEffect(() => {
+        if (!mapRef.current || !activeDevice) return;
+      
+        const latestCoord = coordinates
+          .filter(coord => coord.Module === activeDevice)
+          .reduce((latest, current) =>
+            !latest || new Date(current.Timestamp) > new Date(latest.Timestamp) ? current : latest,
+          null);
+      
         if (!latestCoord) return;
-    
-        // Center and zoom to the latest coordinate
-        mapRef.current.panTo({ 
-            lat: parseFloat(latestCoord.Latitude), 
-            lng: parseFloat(latestCoord.Longitude) 
-        });
-        mapRef.current.setZoom(18); // Adjust zoom level as needed
-    
-    }, [activeDevice, coordinates]); // Re-run when activeDevice changes
-    
+      
+        const lat = parseFloat(latestCoord.Latitude);
+        const lng = parseFloat(latestCoord.Longitude);
+      
+        mapRef.current.panTo({ lat, lng });
+    }, [coordinates, activeDevice]);
+      
+
     return <div ref={mapContainerRef} style={{ height: "100%", width: "100%" }} />;
 };
 

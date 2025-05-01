@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
 import './LoginSignup.css';
 import bikeImage from '../images/bike.png';
 import locationImage from '../images/location.png';
 import motorbg from '../images/motorbg.png';
 import trackiconlogin from '../images/motoricon.png';
-
+import TMLogo from '../images/TMLogoB.png';
 import axios from "axios"; 
 
 
@@ -15,6 +16,10 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [verificationCode, setVerificationCode] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [isSendingCode, setIsSendingCode] = useState(false);
+    const [countdown, setCountdown] = useState(0);
+
   
     const [isVerified, setIsVerified] = useState(false);
 
@@ -22,16 +27,20 @@ const SignUp = () => {
         e.preventDefault();
         
         if (!email) {
-          alert("Please enter an email address.");
+          toast.error("Please enter an email address.");
           return;
         }
-    
+        if (isSendingCode) return;
+        setIsSendingCode(true);
+        setCountdown(60); 
         try {
           const response = await axios.post("http://localhost:8800/send-otp", { email });
-          alert(response.data.message);
+          toast.success(response.data.message);
         } catch (error) {
           console.error("Error sending OTP:", error.response?.data || error.message);
-          alert("Failed to send verification code.");
+          toast.error("Failed to send verification code.");
+          setIsSendingCode(false);
+          setCountdown(0);
         }
     };
     
@@ -39,7 +48,7 @@ const SignUp = () => {
         e.preventDefault();
 
         if (!email || !verificationCode) {
-          alert("Please enter your email and verification code.");
+          toast.error("Please enter your email and verification code.");
           return;
         }
       
@@ -49,24 +58,25 @@ const SignUp = () => {
             otp: verificationCode 
           });
       
-          alert(response.data.message);
+          toast.success(response.data.message);
           setIsVerified(true); // Mark as verified
           localStorage.setItem("signupId", response.data.signupId); // Store signupId for use in signup
         } catch (error) {
           console.error("Error verifying OTP:", error.response?.data || error.message);
-          alert(error.response?.data?.error || "Invalid verification code.");
+          toast.error(error.response?.data?.error || "Invalid verification code.");
         }
     };
       
     
-    const handleSignUp = async () => {
+    const handleSignUp = async (e) => {
+        e.preventDefault();
         if (!isVerified) {
-          alert("Please verify your email first.");
+          toast.error("Please verify your email first.");
           return;
         }
       
         if (!username || !email || !password) {
-          alert("Please fill out all fields.");
+            toast.error("Please fill out all fields.");
           return;
         }
       
@@ -75,7 +85,7 @@ const SignUp = () => {
           const signupId = localStorage.getItem("signupId");
       
           if (!signupId) {
-            alert("Verification data not found. Please verify your email again.");
+            toast.error("Verification data not found. Please verify your email again.");
             return;
           }
       
@@ -90,7 +100,7 @@ const SignUp = () => {
           navigate("/login");
         } catch (error) {
           console.error("Error signing up:", error.response?.data || error.message);
-          alert(error.response?.data?.error || "Sign-up failed.");
+          toast.error(error.response?.data?.error || "Sign-up failed.");
         }
     };
 
@@ -116,16 +126,23 @@ const SignUp = () => {
             document.body.className = "default-body";
         };
     }, []);*/ 
+    useEffect(() => {
+        let timer;
+        if (isSendingCode && countdown > 0) {
+          timer = setTimeout(() => {
+            setCountdown((prevCountdown) => prevCountdown - 1);
+          }, 1000); // Every 1 second
+        } else if (countdown === 0) {
+          setIsSendingCode(false);
+        }
+      
+        return () => clearTimeout(timer); // Cleanup timer
+      }, [isSendingCode, countdown]);
+      
 
     return(
         <div className="starting-container">
-            <div className="super-main-container">
-               <div className="signup-welcome-page">
-                    <h1>Welcome to TrackMoto</h1>
-                    <p>Track Your Treasures with Ease</p>
-                    <p>Locate What Matters Most.</p>
-                </div>
-            </div>
+           
 
             <div className="main-container">
                 <div class="signup-desktop-container">
@@ -142,6 +159,7 @@ const SignUp = () => {
                             <span className="material-symbols-outlined" onClick={handleBackClick}>arrow_back</span>
                             <div className="SignUp-txt">
                                 <h1>Sign Up</h1>
+                                <p>Fill up the form to register</p>
                             </div>
                         </div>
                         <form class="SignUp-form-desktop">
@@ -157,13 +175,20 @@ const SignUp = () => {
                             </div>
                             <div class ="input-group">
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     placeholder=""
                                     className="input-field"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                                 <label htmlFor="password" className="floating-label">Password</label>
+                                <span
+                                    className="material-symbols-outlined eye-pass"
+                                    onClick={() => setShowPassword((prev) => !prev)}
+                                    style={{ cursor: "pointer", marginLeft: "-50px", marginTop: "15px", color: "grey"}} // Adjust icon positioning
+                                >
+                                    {showPassword ? "visibility_off" : "visibility"}
+                                </span>
                             </div>
                             <div class="input-group">
                                 <input
@@ -174,7 +199,14 @@ const SignUp = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                                 <label htmlFor="email" className="floating-label">Email</label>
-                                <button class="verify-button" onClick={handleSendVerificationCode}>Send Verification Code</button>
+                                <button 
+                                    className="verify-button" 
+                                    onClick={handleSendVerificationCode}
+                                    disabled={isSendingCode}
+                                    style={{ opacity: isSendingCode ? 0.6 : 1, cursor: isSendingCode ? 'not-allowed' : 'pointer' }}
+                                    >
+                                    {isSendingCode ? `Send again in ${countdown}s` : "Send Verification Code"}
+                                </button>
                             </div>
                             <div className="input-group">
                                 <input
@@ -215,13 +247,20 @@ const SignUp = () => {
                         </div>
                         <div class ="input-group">
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 placeholder=" "
                                 className="input-field"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <label htmlFor="pass" className="floating-label-mobile">Password</label>
+                            <span
+                                    className="material-symbols-outlined eye-pass"
+                                    onClick={() => setShowPassword((prev) => !prev)}
+                                    style={{ cursor: "pointer", marginLeft: "-50px", marginTop: "6px", color: "grey"}} // Adjust icon positioning
+                                >
+                                    {showPassword ? "visibility_off" : "visibility"}
+                            </span>
                         </div>
                         <div class="input-group">
                             <input
@@ -232,7 +271,14 @@ const SignUp = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                             <label htmlFor="email" className="floating-label-mobile">Email</label>
-                            <button class="verify-button" onClick={handleSendVerificationCode}>Send Verification Code</button>
+                            <button 
+                                    className="verify-button" 
+                                    onClick={handleSendVerificationCode}
+                                    disabled={isSendingCode}
+                                    style={{ opacity: isSendingCode ? 0.6 : 1, cursor: isSendingCode ? 'not-allowed' : 'pointer' }}
+                                    >
+                                    {isSendingCode ? `Send again in ${countdown}s` : "Send Verification Code"}
+                            </button>
                         </div>
                         <div class="input-group">
                             <input

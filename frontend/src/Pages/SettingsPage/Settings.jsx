@@ -147,6 +147,7 @@ export const Settings = () => {
       setIsPasswordModalOpen(true); // Show password input after OTP verification
     } catch (error) {
       console.error(error.message);
+      setVerificationCode("");
       alert(error.message);
     }
   };
@@ -210,7 +211,7 @@ export const Settings = () => {
           <div className="options-container">
             <div className="options-content">
               <div className="option-div" onClick={handleManageDevicesClick}>
-                <span className="material-symbols-outlined icon-span">devices</span>
+              <span class="material-symbols-outlined icon-span">two_wheeler</span>
                 <p>Manage Devices</p>
                 <span className="material-symbols-outlined arrow-right">chevron_right</span>
               </div>
@@ -248,13 +249,13 @@ export const Settings = () => {
                   </div>
                   {showVerificationInput && (
                   <div className="modal-verify-mobile-num">
-                  <input
-                    type="text"
-                    placeholder="Enter verification code"
-                    value={verificationCode}
-                    onChange={(e) => setVerificationCode(e.target.value)}
-                  />
-                  <button onClick={() => verifyUserOTP(verificationCode)} className='pass-confirm-btn'>Confirm</button>
+                    <input
+                      type="text"
+                      placeholder="Enter verification code"
+                      value={verificationCode}
+                      onChange={(e) => setVerificationCode(e.target.value)}
+                    />
+                    <button onClick={() => verifyUserOTP(verificationCode)} className='pass-confirm-btn'>Confirm</button>
                   </div>
                   )}
                 </div>

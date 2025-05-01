@@ -30,6 +30,12 @@
     border-radius: 20px;
     cursor: pointer;
 }
+.profile-back:hover{
+    background-color: #ffd700;
+}
+.profile-back-btn:hover{
+    color: #333333;
+}
 
 .profile-profile-card{
     width: 100%;
@@ -87,10 +93,32 @@
 .name-div{
     text-align: left;
 }
+.name-div h6{
+    color: #5F6368;
+}
+
+.editable-input{
+    /* border: 2px solid green; */
+    margin-top: 5px;
+    width: 80%;
+    height: 2em;
+    border-radius: 4px;
+    background-color: #1B1F2D;
+    color: white;
+    border: 1px solid white;
+}
+.editable-input:focus{
+    color: white;
+    background-color: #1B1F2D;
+}
 .edit-profile-div{
     display: flex;
     align-items: end;
     height: 35px;
+    transition: 0.3s;
+}
+.edit-profile-div .edit-profile-icon:hover{
+    color: #ffd700;
 }
 .edit-profile-div span:hover{
     color: white;
@@ -107,9 +135,10 @@
     align-items: center;
     z-index: 1000;
 }
+
 .Chp-modal-content{
     background-color: #1B1F2D;
-    border: 1px solid #ffd700;
+    border: 1px solid #383636;
     padding: 20px;
     border-radius: 10px;
     width: clamp(300px, 90%, 400px); /* Responsive width */
@@ -121,25 +150,58 @@
     justify-content: space-between;
     align-items: center;
 }
+.Chp-modal-content h3{
+    /* border: 2px solid green; */
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+}
+
 .Chp-modal-buttons{
     margin-top: 1em;
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
+    justify-content: flex-end;
+    gap: 10px;
 }
 .Chp-modal-buttons button{
     border-radius: 4px;
     padding: 0 16px;
     cursor: pointer;
     background-color: #ffd700;
-    border: 1px solid rgba(0, 0, 0, 0.16);
     height: 25px;
+    transition: 0.3s;
+
+    /* border: 2px solid green; */
+    
+}
+.Chp-modal-buttons .change-pic-cancel-btn{
+    border: 1.8px solid #333741;
+    background-color: #1B1F2D;
+    color: white;
+    font-weight: bold;
+
+}
+.Chp-modal-buttons .change-pic-cancel-btn:hover {
+    background-color: #ffd700;
+    color: #333333;
+}
+.Chp-modal-buttons .change-pic-confirm-btn{
+    border: none;
+    background-color: #5F6368;
+    color: white;
+    font-weight: bold;
+}
+.Chp-modal-buttons .change-pic-confirm-btn:hover {
+    background-color: #ffd700;
+    color: #333333;
 }
 .Chp-modal-content input{
     margin-top: 1em;
+    /* border: 2px solid salmon; */
+    width: 100%;
+
 }
 .Chp-modal-content input[type="file"]::file-selector-button{
     border-radius: 4px;
@@ -151,6 +213,9 @@
     box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
     margin-right: 16px;
     transition: background-color 200ms;
+}
+.Chp-modal-content input[type="file"]::file-selector-button:hover{
+    background-color: #5F6368;
 }
 .profile-buttons{
     display: flex;

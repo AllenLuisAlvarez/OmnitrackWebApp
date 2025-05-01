@@ -140,6 +140,13 @@
     cursor: pointer;
     /* border: 1px solid salmon; */
     margin-top: 10px;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+.option-div:hover{
+    background-color: #e6c200;
+    border-radius: 10px;
+    color: #333333;
 }
 
 
@@ -219,9 +226,11 @@
     width: 100%;
 }
 .modal-verify-mobile-num input{
-    background-color: #333741;
     border: none;
     width: 70%;
+}
+.modal-verify-mobile-num .email-input{
+    background-color: #333741;
 }
 .modal-verify-mobile-num button{
     width: 30%;

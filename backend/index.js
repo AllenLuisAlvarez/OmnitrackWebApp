@@ -198,7 +198,7 @@ app.post("/login", async (req, res) => {
       const passwordMatch = await bcrypt.compare(password, hashedPassword);
       
       if (!passwordMatch) {
-        return res.status(401).json({ message: "Invalid password" });
+        return res.status(401).json({ message: "Invalid username or password" });
       }
 
       // Check if the user has owned any devices
@@ -276,7 +276,7 @@ app.post('/get-coordinates', async (req, res) => {
     }, {});
 
     // Fetch coordinates from Firebase
-    const coordinatesRef = db.ref('/coordinates2'); // Reference to the 'coordinates' node
+    const coordinatesRef = db.ref('/coordinates3'); // Reference to the 'coordinates' node
     const coordinatesSnapshot = await coordinatesRef.once('value'); // Get all data from 'coordinates'
     const coordinatesData = coordinatesSnapshot.val();
 
@@ -367,7 +367,7 @@ app.patch("/claim-device", async (req, res) => {
     });
 
     // Fetch coordinates for the claimed device and include the device's color
-    const coordinatesRef = db.ref("/coordinates2");
+    const coordinatesRef = db.ref("/coordinates3");
     const coordSnapshot = await coordinatesRef.orderByChild("Module").equalTo(deviceData.Module).once("value");
 
     const coordinates = [];
@@ -454,6 +454,7 @@ app.patch('/update-user-profile', async (req, res) => {
 
     try {
         const userRef = db.ref(`/users/${userId}`);
+        const userControlsRef = db.ref(`/user_controls`);
         const snapshot = await userRef.once("value");
 
         if (!snapshot.exists()) {
@@ -471,6 +472,40 @@ app.patch('/update-user-profile', async (req, res) => {
         // Update user profile
         await userRef.update(updatedData);
 
+        // Update the user's controls mobile number(s)
+        if (mobile) {
+          const devicesSnapshot = await db.ref("/devices").orderByChild("Owner").equalTo(userId).once("value");
+          const ownedModules = [];
+        
+          if (devicesSnapshot.exists()) {
+            devicesSnapshot.forEach((child) => {
+              const device = child.val();
+              if (device.Module) {
+                ownedModules.push(device.Module);
+              }
+            });
+          }
+        
+          const userControlsRef = db.ref("/user_controls");
+          const userControlsSnapshot = await userControlsRef.once("value");
+          const controlsData = userControlsSnapshot.val() || {};
+        
+          const updates = {};
+        
+          ownedModules.forEach((moduleKey) => {
+            if (controlsData[moduleKey]) {
+              updates[`/${moduleKey}/mobile_number`] = mobile;
+            }
+          });
+        
+          if (Object.keys(updates).length > 0) {
+            await userControlsRef.update(updates);
+            console.log("Updated mobile_number for modules:", updates);
+          } else {
+            console.log("No user_controls entries to update.");
+          }
+        }
+        
         // Update session with the new values
         if (req.session.user) {
             if (username) req.session.user.username = username;
@@ -714,7 +749,7 @@ app.post("/insert_gps", async (req, res) => {
     };
 
     // Save baseEntry to Firebase under the /coordinates path
-    const ref = db.ref("coordinates2");
+    const ref = db.ref("coordinates3");
     await ref.push(baseEntry); // Push base entry to Firebase
 
     // Add color for emitting via Socket.IO
@@ -913,6 +948,126 @@ app.post("/verify-otp-cp", async (req, res) => {
     return res.status(500).json({ error: "Failed to verify OTP." });
   }
 });
+
+app.post("/update-password", async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  if (!email || !newPassword) {
+    return res.status(400).json({ error: "Email and new password are required." });
+  }
+
+  try {
+    const usersRef = admin.database().ref("users");
+    const snapshot = await usersRef.orderByChild("email").equalTo(email).once("value");
+
+    if (!snapshot.exists()) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Get user key from Firebase
+    const userKey = Object.keys(snapshot.val())[0];
+
+    // Hash the new password before saving
+    const hashedPassword = await bcrypt.hash(newPassword, 10); // 10 = salt rounds
+
+    // Update password in Firebase
+    await usersRef.child(userKey).update({ password: hashedPassword });
+
+    return res.json({ message: "Password updated successfully!" });
+
+  } catch (error) {
+    console.error("Error updating password:", error);
+    return res.status(500).json({ error: "Failed to update password." });
+  }
+});
+
+// --------------- FORGOT PASSWORD API --------------- //
+
+app.post("/forgot-password", async (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: "Email is required." });
+
+  try {
+    const usersRef = admin.database().ref("users");
+    const snapshot = await usersRef.orderByChild("email").equalTo(email).once("value");
+
+    if (!snapshot.exists()) {
+      return res.status(404).json({ error: "User not found with this email." });
+    }
+
+    // Generate OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit OTP
+    const otpExpiry = Date.now() + 3 * 60 * 1000; // 3 minutes
+
+    // Get user key from Firebase
+    const userKey = Object.keys(snapshot.val())[0];
+
+    // Update Firebase with OTP
+    await usersRef.child(userKey).update({ otp, otpExpiry });
+
+    // Send OTP via SendGrid
+    const msg = {
+      to: email,
+      from: {
+        email: process.env.EMAIL_HOST,
+        name: "TrackMoto",
+      },
+      subject: "TrackMoto Password Reset OTP",
+      text: `Your password reset code is: ${otp}. It is valid for 3 minutes.`,
+      html: `<h4>Your TrackMoto password reset code is: <h1><strong>${otp}</strong></h1> It is valid for 3 minutes.</h4>`,
+    };
+
+    await sgMail.send(msg);
+
+    return res.json({ message: "OTP sent successfully to your email." });
+
+  } catch (error) {
+    console.error("Error sending OTP:", error);
+    return res.status(500).json({ error: "Failed to send OTP." });
+  }
+});
+
+app.post("/verify-code", async (req, res) => {
+  const { email, otp } = req.body;
+
+  console.log("Received email:", email, "OTP:", otp); // Debugging log
+
+  if (!email || !otp) {
+    return res.status(400).json({ error: "Email and OTP are required." });
+  }
+
+  try {
+    const usersRef = admin.database().ref("users");
+    const snapshot = await usersRef.orderByChild("email").equalTo(email).once("value");
+
+    if (!snapshot.exists()) {
+      console.error("User not found for email:", email); // Debugging log
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    const userKey = Object.keys(snapshot.val())[0];
+    const userData = snapshot.val()[userKey];
+
+    console.log("Stored OTP in DB:", userData.otp, "Received OTP:", otp); // Debugging log
+
+    if (userData.otp !== otp) {
+      return res.status(400).json({ error: "Invalid OTP." });
+    }
+    if (Date.now() > userData.otpExpiry) {
+      return res.status(400).json({ error: "OTP has expired." });
+    }
+
+    await usersRef.child(userKey).update({ otp: null, otpExpiry: null });
+
+    return res.json({ message: "OTP verified successfully." });
+
+  } catch (error) {
+    console.error("Error verifying OTP:", error);
+    return res.status(500).json({ error: "Failed to verify OTP." });
+  }
+});
+
+
 
 app.post("/update-password", async (req, res) => {
   const { email, newPassword } = req.body;

@@ -14,6 +14,18 @@
             background-color: #fbbf24 ;
         }
     
+        .TMLogo-signup-container{
+            /* border: 2px solid salmon; */
+            width: 100%;
+            height: 20%;
+        }
+        .TML-Signup{
+            /* border: 2px solid red; */
+            width: 100%;
+            height: 50%;
+            object-fit: contain;
+        }
+
         .SignUp-container{
             width: 100%;
             padding: 40px;
@@ -42,7 +54,7 @@
             margin-bottom: 30px;
             position: relative;
             top: 2rem;
-        
+            /* border: 1px solid salmon; */
         }
         
         .headersignup, .headerlogin{
@@ -205,7 +217,6 @@
             background-color: #D36C24;
             color: white;
         }
-    
         /* Forgot Password Link */
         .forgot-password-link {
             color: #ffc107;
@@ -266,7 +277,7 @@
         }
 
         .Login-txt h1, .SignUp-txt h1{
-            position: absolute;
+            /* position: absolute; */
             text-align: center;
             display: flex;
             align-items: center;
@@ -353,9 +364,14 @@
             float: right;
             position: relative;
             font-size: 30px;
-            bottom: 1.5rem;
+            /* bottom: 1.5rem; */
             cursor: pointer;
-            color: white;
+            color: black;
+          }
+          
+          .error-outline {
+            border: 2px solid #ed4337 !important;
+            outline: none;
           }
           
     
@@ -441,7 +457,16 @@
     
         @media(min-width: 768px) and (max-width: 1023px) {
     
-
+            .super-main-container{
+                /* border: 2px solid white; */
+                height: 20%;
+                width: 100%;
+                margin-top: 15em;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
             .login-desktop-container, .signup-desktop-container{
                 background-color: #17191f;
                 display: flex;
@@ -452,9 +477,14 @@
                 height: 30rem;
                 max-width: 70rem;
                 max-height:70rem;
-            } 
+            }
+            /* .TMLogo-signup-container{
+                border: 2px solid purple;
+                height: 5em;
+                margin-top: 10em;
+            } */
 
-            /**.signup-desktop-container{
+            /*.signup-desktop-container{
                 background-color: #17191f;
                 display: flex;
                 padding: 1rem;
@@ -490,7 +520,7 @@
             position: relative;
             }
 
-            /**.SignUp-desktop-main-container{
+            /*.SignUp-desktop-main-container{
                 max-width: 50rem;
                 width: 40%;
                 position: relative;
@@ -529,7 +559,7 @@
             display: flex;
             gap: 20px;
             top: 1rem;
-            color:white ;
+            color:#2C2E38 ;
             position: relative;
         }
     
@@ -571,7 +601,19 @@
         .signup-welcome-page{
             color: #050505;
             position: relative;
+            /* border: 2px solid olivedrab; */
+            height: 10em;
+            width: 100%;
         
+        }
+        .TMLogo-signup-container{
+            /* border: 2px solid purple; */
+            height: 80%;
+        }
+        .TML-Signup{
+            height: 100%;
+            width: 30%;
+            object-fit: cover;
         }
 
         .signup-welcome-page h1{
@@ -635,6 +677,25 @@
         }
     
         @media(min-width: 1024px) {
+            
+            .signup-welcome-page{
+                color: #050505;
+                position: relative;
+                border: 2px solid olivedrab;
+                height: 20%;
+                width: 100%;
+            
+            }
+            .TMLogo-signup-container{
+                border: 2px solid purple;
+                height: 50%;
+            }
+            .TML-Signup{
+                height: 100%;
+                width: 30%;
+                object-fit: cover;
+                border: 2px solid red;
+            }
     
             .login-desktop-container,.signup-desktop-container{
                 background-color: #17191f;
@@ -661,13 +722,22 @@
                 bottom: 5rem;    
             }
         
-            .Login-form-desktop, .SignUp-form-desktop{
+            .Login-form-desktop{
                 display: flex;
                 position: relative;
                 flex-direction: column;
                 gap: 20px;
                 padding: 4px;
-                top: 7rem;
+                top: 4rem;
+                width: 19rem;
+            }
+            .SignUp-form-desktop{
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                gap: 20px;
+                padding: 4px;
+                top: 6rem;
                 width: 19rem;
             }
         
@@ -745,7 +815,7 @@
                 font-size: 17px;
             }
         
-            .super-main-container{
+            /* .super-main-container{
                 position: relative;
                 text-align: center;
                 align-items: center;
@@ -753,7 +823,7 @@
                 width: 100vw;
                 height: 100vh;
                 bottom: 1rem;
-            }
+            } */
     
             .super-main-container .login-welcome-page{
                 width: 100%;
