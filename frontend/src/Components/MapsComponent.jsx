@@ -282,7 +282,7 @@ const MapsComponent = ({ activeDevice, selectedFilter = "today", selectedDate, g
         };
     
         updateRoutes();
-    }, [isTracking, selectedFilter, userLocation, devices, locations]);
+    }, [isTracking, selectedFilter, userLocation, devices, locations, selectedDate]);
     // END OF MARKER ROUTE
 
     // MAP INITIALIZE
