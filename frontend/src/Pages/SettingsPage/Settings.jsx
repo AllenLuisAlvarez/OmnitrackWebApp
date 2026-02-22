@@ -101,7 +101,7 @@ export const Settings = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8800/send-otp-cp", {
+      const response = await fetch("https://omnitrackwebapp.onrender.com/send-otp-cp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -129,7 +129,7 @@ export const Settings = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:8800/verify-otp-cp", {
+      const response = await fetch("https://omnitrackwebapp.onrender.com/verify-otp-cp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -165,7 +165,7 @@ export const Settings = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:8800/update-password", {
+      const response = await fetch("https://omnitrackwebapp.onrender.com/update-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -201,7 +201,7 @@ export const Settings = () => {
         </div>
           <div className="profile-card">
             <div className="profile-pic">
-              <img src={`http://localhost:8800/public/images/${user.profileImage}`} alt="Profile-Picture" />
+              <img src={`https://omnitrackwebapp.onrender.com/public/images/${user.profileImage}`} alt="Profile-Picture" />
             </div>
             <div className="profile-details">
               <p>{user ? user.username : "Loading..."}</p>

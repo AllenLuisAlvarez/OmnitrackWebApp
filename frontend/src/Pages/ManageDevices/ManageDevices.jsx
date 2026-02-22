@@ -60,7 +60,7 @@ const ManageDevices = ({ onBack }) => {
         try {
             if (selectedDeviceId) {
                 // Send updated name to the backend
-                const response = await axios.patch("http://localhost:8800/update-device", {
+                const response = await axios.patch("https://omnitrackwebapp.onrender.com/update-device", {
                     userId: user.userId,
                     deviceId: selectedDeviceId,
                     newName: updatedName,
@@ -133,7 +133,7 @@ const ManageDevices = ({ onBack }) => {
 
     const handleConfirmDelete = async (selectedDeviceId, selectedDeviceModule) => {
         try {
-            const response = await axios.patch('http://localhost:8800/remove-device', {
+            const response = await axios.patch('https://omnitrackwebapp.onrender.com/remove-device', {
               userId: user.userId,
               deviceId: selectedDeviceId,
             });
@@ -166,7 +166,7 @@ const ManageDevices = ({ onBack }) => {
             }
 
             try {
-                const response = await axios.post('http://localhost:8800/get-devices', { userId: user.userId });
+                const response = await axios.post('https://omnitrackwebapp.onrender.com/get-devices', { userId: user.userId });
         
                 if (response.data.success) {
                 setDevices(response.data.devices);

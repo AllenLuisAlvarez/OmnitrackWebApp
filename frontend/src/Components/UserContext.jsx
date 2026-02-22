@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
 
     const fetchSessionUser = async () => {
         try {
-            const response = await fetch("http://localhost:8800/get-session-user", {
+            const response = await fetch("https://omnitrackwebapp.onrender.com/get-session-user", {
                 credentials: "include", // Include cookies for the session
             });
 
@@ -67,7 +67,7 @@ export const UserProvider = ({ children }) => {
 
     const logoutUser = async () => {
         try {
-            const response = await fetch("http://localhost:8800/logout", {
+            const response = await fetch("https://omnitrackwebapp.onrender.com/logout", {
               method: "POST",
               credentials: "include",
             });

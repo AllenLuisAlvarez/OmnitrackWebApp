@@ -34,7 +34,7 @@ const SignUp = () => {
         setIsSendingCode(true);
         setCountdown(60); 
         try {
-          const response = await axios.post("http://localhost:8800/send-otp", { email });
+          const response = await axios.post("https://omnitrackwebapp.onrender.com/send-otp", { email });
           toast.success(response.data.message);
         } catch (error) {
           console.error("Error sending OTP:", error.response?.data || error.message);
@@ -53,7 +53,7 @@ const SignUp = () => {
         }
       
         try {
-          const response = await axios.post("http://localhost:8800/verify-otp", { 
+          const response = await axios.post("https://omnitrackwebapp.onrender.com/verify-otp", { 
             email, 
             otp: verificationCode 
           });
@@ -89,7 +89,7 @@ const SignUp = () => {
             return;
           }
       
-          const response = await axios.patch("http://localhost:8800/user-signup", {
+          const response = await axios.patch("https://omnitrackwebapp.onrender.com/user-signup", {
             signupId,
             username,
             password,

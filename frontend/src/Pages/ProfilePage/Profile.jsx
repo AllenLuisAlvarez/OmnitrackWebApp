@@ -51,7 +51,7 @@ const Profile = ({ onBack }) => {
 
     const handleSaveClick = async () => {
         try {
-            const response = await axios.patch("http://localhost:8800/update-user-profile", {
+            const response = await axios.patch("https://omnitrackwebapp.onrender.com/update-user-profile", {
                 userId: user.userId,
                 username: updatedName || user.username,
                 mobile: updatedMobile || user.mobile,
@@ -102,7 +102,7 @@ const Profile = ({ onBack }) => {
         formData.append("userId", user.userId);
 
         try {
-            const response = await axios.post("http://localhost:8800/update-profile-image", formData, {
+            const response = await axios.post("https://omnitrackwebapp.onrender.com/update-profile-image", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -127,7 +127,7 @@ const Profile = ({ onBack }) => {
 
     const handleRemoveImageClick = async () => {
         try {
-          const response = await axios.patch("http://localhost:8800/remove-image", {
+          const response = await axios.patch("https://omnitrackwebapp.onrender.com/remove-image", {
             userId: user.userId, // Pass the userId for validation
           });
       
@@ -171,7 +171,7 @@ const Profile = ({ onBack }) => {
 
             <div className="profile-profile-card">
                 <div className="profile2-picture">
-                    <img src={`http://localhost:8800/public/images/${user.profileImage}`} alt="Profile-Picture" />
+                    <img src={`https://omnitrackwebapp.onrender.com/public/images/${user.profileImage}`} alt="Profile-Picture" />
                 </div>
                 <div className="profile-buttons">
                     <div className="add-image">

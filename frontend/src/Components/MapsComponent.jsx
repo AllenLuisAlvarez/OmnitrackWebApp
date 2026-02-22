@@ -167,7 +167,7 @@ const MapsComponent = ({ activeDevice, selectedFilter = "today", selectedDate, g
     
         const origin = `${userLocation.lat},${userLocation.lon}`;
         const destination = `${moduleLocation.lat},${moduleLocation.lng}`;
-        const url = `http://localhost:8800/api/routes?origin=${origin}&destination=${destination}`;
+        const url = `https://omnitrackwebapp.onrender.com/api/routes?origin=${origin}&destination=${destination}`;
     
         try {
             const response = await fetch(url);

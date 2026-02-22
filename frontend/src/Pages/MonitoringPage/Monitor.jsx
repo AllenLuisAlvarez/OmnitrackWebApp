@@ -145,7 +145,7 @@ const Monitor = () => {
   
     try {
 
-      const response = await axios.patch('http://localhost:8800/claim-device', {
+      const response = await axios.patch('https://omnitrackwebapp.onrender.com/claim-device', {
         userId: user.userId,  // Current user ID
         deviceId: deviceIdInput.trim(),  // Trim whitespace
       });
@@ -234,8 +234,8 @@ const Monitor = () => {
         
         try {
           const [devicesResponse, coordinatesResponse] = await Promise.all([
-            axios.post('http://localhost:8800/get-devices', { userId: user.userId }),
-            axios.post('http://localhost:8800/get-coordinates', { userId: user.userId }),
+            axios.post('https://omnitrackwebapp.onrender.com/get-devices', { userId: user.userId }),
+            axios.post('https://omnitrackwebapp.onrender.com/get-coordinates', { userId: user.userId }),
           ]);
     
           // Handle devices response
@@ -269,7 +269,7 @@ const Monitor = () => {
   useEffect(() => {
     if (!user || user.isNewUser) return;
 
-    const socket = io("http://localhost:8800"); 
+    const socket = io("https://omnitrackwebapp.onrender.com"); 
 
     // Listen for new coordinates
     socket.on("new_coordinates", (newCoordinate) => {
@@ -389,7 +389,7 @@ const Monitor = () => {
               <div className="profile-icon-container">
                   <div className="expanded-profile">
                     <div className="profile-icon">
-                    <img src={`http://localhost:8800/public/images/${user.profileImage}`} alt="Profile-Picture" />
+                    <img src={`https://omnitrackwebapp.onrender.com/public/images/${user.profileImage}`} alt="Profile-Picture" />
                     </div>
                     <p>{user ? user.username : "Loading..."}</p>
                   </div>

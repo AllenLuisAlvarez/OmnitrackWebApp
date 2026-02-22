@@ -63,7 +63,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8800/login", {
+      const response = await fetch("https://omnitrackwebapp.onrender.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const Login = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:8800/forgot-password", {
+      const response = await fetch("https://omnitrackwebapp.onrender.com/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -144,7 +144,7 @@ const Login = () => {
     try {
       console.log("Verifying OTP for email:", resetEmail); // ✅ Debugging
   
-      const response = await fetch("http://localhost:8800/verify-code", {
+      const response = await fetch("https://omnitrackwebapp.onrender.com/verify-code", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -187,7 +187,7 @@ const Login = () => {
     try {
       console.log("Updating password for email:", resetEmail); // ✅ Debugging
   
-      const response = await fetch("http://localhost:8800/update-password", {
+      const response = await fetch("https://omnitrackwebapp.onrender.com/update-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
