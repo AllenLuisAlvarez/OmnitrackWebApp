@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { UserContext } from '../../Components/UserContext';
 import useMediaQuery from '../MonitoringPage/useMediaQuery'; // Assuming you already have this custom hook
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const Profile = ({ onBack }) => {
     const navigate = useNavigate();

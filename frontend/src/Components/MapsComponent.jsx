@@ -1,5 +1,4 @@
-import React, { useRef, useEffect, useState, useContext, useMemo } from "react";
-import Loader from "../Loader/Loader";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import { useDevices } from "./DeviceContext";
 import { UserContext } from "./UserContext";
 import { toast } from "react-toastify";
@@ -18,10 +17,10 @@ const MapsComponent = ({ activeDevice, selectedFilter = "today", selectedDate, g
     const userMarkerRef = useRef(null);
     const userCircleRef = useRef(null);
 
-    const [routes, setRoutes] = useState({});
+    const [, setRoutes] = useState({});
     const routePolylinesRef = useRef({}); // Store only route polylines
 
-    const { devices, locations, setLocations, coordinates, updateDeviceDistances } = useDevices();
+    const { devices, locations, setLocations, coordinates } = useDevices();
     const { userLocation } = useContext(UserContext);
     const mapId = "9b8de3b2ac66ed81";
     

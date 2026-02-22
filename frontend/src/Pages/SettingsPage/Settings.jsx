@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import './Settings.css';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Components/UserContext";
-import axios from "axios"; 
+//import axios from "axios"; 
 
 
 // Calling other component
@@ -22,7 +22,7 @@ export const Settings = () => {
   const [verificationCode, setVerificationCode] = useState("");
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false); // New password modal state
   const [showVerificationInput, setShowVerificationInput] = useState(false);
-  const [email, setEmail] = useState("");
+  //const [email, setEmail] = useState("");
   
 
   const { user, logoutUser } = useContext(UserContext);

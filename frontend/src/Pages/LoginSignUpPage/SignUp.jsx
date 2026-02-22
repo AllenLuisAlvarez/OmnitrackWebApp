@@ -6,7 +6,7 @@ import bikeImage from '../images/bike.png';
 import locationImage from '../images/location.png';
 import motorbg from '../images/motorbg.png';
 import trackiconlogin from '../images/motoricon.png';
-import TMLogo from '../images/TMLogoB.png';
+//import TMLogo from '../images/TMLogoB.png';
 import axios from "axios"; 
 
 

@@ -12,7 +12,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { user, loginUser } = useContext(UserContext);
+  const { loginUser } = useContext(UserContext);
   const [isModalOpen, setIsModalOpen] = useState(false); // State for "Forgot Password" modal
   const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false); // State for verification modal
   const [email, setEmail] = useState(""); // Email Address input
